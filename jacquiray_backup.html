@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landscape Design by Jacqui Ray — Site Backup</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: #333; background: #fff; }
+
+    /* ── Header ── */
+    header {
+      background: #fff;
+      border-bottom: 2px solid #b0cfe8;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-text {
+      text-align: center;
+      line-height: 1.2;
+    }
+    .logo-text .brand { font-size: 1.5rem; letter-spacing: 0.18em; color: #4a6e96; text-transform: uppercase; }
+    .logo-text .script { font-size: 1.1rem; font-style: italic; color: #4a6e96; }
+    .logo-tagline { font-size: 0.7rem; letter-spacing: 0.2em; color: #888; text-transform: uppercase; margin-top: 4px; }
+
+    /* ── Nav ── */
+    nav { background: #fff; border-bottom: 1px solid #dde8f0; }
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; padding: 0 32px; }
+    nav ul li a {
+      display: block; padding: 14px 22px;
+      font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #4a6e96; text-decoration: none; border-bottom: 3px solid transparent;
+      transition: border-color 0.2s;
+    }
+    nav ul li a:hover, nav ul li a.active { border-bottom-color: #4a6e96; }
+
+    /* ── Page sections (single-page structure) ── */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* ── Hero image ── */
+    .hero {
+      width: 100%; height: 380px;
+      background: linear-gradient(160deg, #b0cfe8 0%, #d4e8c2 60%, #a8c5a0 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.7); padding: 6px 16px;
+      font-size: 0.72rem; color: #555; font-style: italic;
+    }
+    .hero-thumbnails {
+      display: flex; gap: 6px; padding: 6px 0 12px;
+    }
+    .hero-thumb {
+      width: 70px; height: 45px; border-radius: 3px;
+      background: linear-gradient(135deg, #b0cfe8, #a8c5a0);
+      flex-shrink: 0;
+    }
+
+    /* ── Sections ── */
+    .section-content { max-width: 860px; margin: 0 auto; padding: 40px 32px; }
+    h1.page-title { font-size: 1.6rem; color: #4a6e96; margin-bottom: 24px; }
+    p { line-height: 1.75; color: #444; margin-bottom: 16px; }
+
+    /* ── Services list ── */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 24px; }
+    .service-card {
+      border: 1px solid #dde8f0; border-radius: 6px; padding: 20px;
+      background: #f7fafd;
+    }
+    .service-card h3 { font-size: 0.9rem; color: #4a6e96; margin-bottom: 8px; line-height: 1.4; }
+    .service-card p { font-size: 0.85rem; color: #666; margin: 0; }
+
+    /* ── About ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+    .about-img {
+      width: 100%; height: 260px; border-radius: 6px;
+      background: linear-gradient(135deg, #c8e0f0, #d4e8c2);
+    }
+    @media (max-width: 600px) { .about-grid { grid-template-columns: 1fr; } }
+
+    /* ── Contact ── */
+    .contact-block { background: #f7fafd; border: 1px solid #dde8f0; border-radius: 8px; padding: 28px 32px; margin-bottom: 28px; }
+    .contact-block p { margin-bottom: 8px; }
+    .contact-block strong { color: #4a6e96; }
+    .contact-form label { display: block; font-size: 0.82rem; color: #555; margin-bottom: 4px; margin-top: 12px; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 9px 12px; border: 1px solid #ccd8e4; border-radius: 4px;
+      font-size: 0.9rem; font-family: inherit;
+    }
+    .contact-form textarea { height: 100px; resize: vertical; }
+    .contact-form button {
+      margin-top: 14px; background: #4a6e96; color: #fff;
+      border: none; padding: 10px 28px; border-radius: 4px;
+      font-size: 0.88rem; cursor: pointer; letter-spacing: 0.05em;
+    }
+    .service-area { margin-top: 24px; font-size: 0.82rem; color: #777; font-style: italic; }
+
+    /* ── Footer ── */
+    footer { background: #dde8f0; text-align: center; padding: 18px; font-size: 0.75rem; color: #666; margin-top: 40px; }
+    footer span { letter-spacing: 0.12em; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-text">
+      <div class="brand">Landscape Design</div>
+      <div class="script">by Jacqui Ray</div>
+      <div class="logo-tagline">Consultancy &nbsp;•&nbsp; Design &nbsp;•&nbsp; Planning &nbsp;•&nbsp; Horticulture</div>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav>
+    <ul>
+      <li><a href="#home" class="active" onclick="showPage('home',this)">Home</a></li>
+      <li><a href="#about" onclick="showPage('about',this)">About Us</a></li>
+      <li><a href="#services" onclick="showPage('services',this)">Our Services</a></li>
+      <li><a href="#contact" onclick="showPage('contact',this)">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════ HOME ═══════════════ -->
+  <section id="home" class="page-section active">
+    <div class="hero">
+      <div class="hero-caption">Native plantings · Pool Design · Rural planting</div>
+    </div>
+    <div class="section-content">
+      <p>Landscape Design by Jacqui Ray offers a comprehensive landscape design, planning and horticultural consultancy service. Our aim is to create a space you will love, and a garden you will enjoy, for many years.</p>
+      <p>With over 19 years experience in designing residential gardens, and drafting plans and documentation for local Council approval, Landscape Design by Jacqui Ray provides a complete design and planning service. Swimming Pool design, planning and approval is also a specialty.</p>
+      <p>From space constrained terraces to large rambling rural areas that can disillusion even an experienced gardener, we've helped clients achieve great results no matter the challenge. We look forward to discussing the individual challenges of your garden areas and the opportunity to transform the space into a thriving addition to your property and a place for friends and family to delight in.</p>
+
+      <div class="hero-thumbnails">
+        <div class="hero-thumb"></div>
+        <div class="hero-thumb" style="background:linear-gradient(135deg,#a8c5a0,#c8e0f0)"></div>
+        <div class="hero-thumb" style="background:linear-gradient(135deg,#d4e8c2,#b0cfe8)"></div>
+        <div class="hero-thumb" style="background:linear-gradient(135deg,#c8e0f0,#a8c5a0)"></div>
+        <div class="hero-thumb" style="background:linear-gradient(135deg,#b0cfe8,#d4e8c2)"></div>
+      </div>
+
+      <h1 class="page-title">Our Services</h1>
+      <div class="services-grid">
+        <div class="service-card"><h3>Landscape Design and Plans</h3></div>
+        <div class="service-card"><h3>Landscape Plans for Complying Development Certificates</h3></div>
+        <div class="service-card"><h3>Swimming Pool Design</h3></div>
+        <div class="service-card"><h3>Landscape Plans for Council Development Applications</h3></div>
+        <div class="service-card"><h3>Horticultural Advice and Planting Plans</h3></div>
+        <div class="service-card"><h3>Planning and Development Regulation Advice</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ ABOUT ═══════════════ -->
+  <section id="about" class="page-section">
+    <div class="section-content">
+      <h1 class="page-title">About Us</h1>
+      <div class="about-grid">
+        <div>
+          <p>Landscape Design by Jacqui Ray (LDBJR) offers a complete and experienced approach to Landscape Design. With over 19 years experience in designing residential gardens, and drafting plans and documentation for local Council approval, LDBJR provides a complete design and planning service.</p>
+          <p>Landscape Design by Jacqui Ray specialises in individually designed, site specific landscape solutions from small courtyards through to large residential sites. These can range in style from sleek outdoor spaces to water efficient landscapes, and natural, native style gardens.</p>
+          <p>Combined with Jacqui's background in horticulture and her passion for plants, you can be confident that the design will be functional, practical and will last for many years.</p>
+          <p>Jacqui's background and experience has extended beyond residential gardens into researching and designing for multiple TV lifestyle programs, including Domestic Blitz, and Better Homes and Gardens.</p>
+        </div>
+        <div class="about-img"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SERVICES ═══════════════ -->
+  <section id="services" class="page-section">
+    <div class="section-content">
+      <h1 class="page-title">Our Services</h1>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Landscape Design and Plans</h3>
+          <p>Individually designed, site-specific landscape solutions from small courtyards to large residential sites.</p>
+        </div>
+        <div class="service-card">
+          <h3>Swimming Pool Design</h3>
+          <p>Swimming pool design, planning and Council approval — a specialty of LDBJR.</p>
+        </div>
+        <div class="service-card">
+          <h3>Landscape Plans for Council DAs</h3>
+          <p>Landscape documentation prepared for Development Application submissions to local councils.</p>
+        </div>
+        <div class="service-card">
+          <h3>Landscape Plans for Complying Development Certificates</h3>
+          <p>Plans and documentation for Complying Development Certificate approvals.</p>
+        </div>
+        <div class="service-card">
+          <h3>Horticultural Advice and Planting Plans</h3>
+          <p>Expert horticultural advice and detailed planting plans tailored to your site.</p>
+        </div>
+        <div class="service-card">
+          <h3>Planning and Development Regulation Advice</h3>
+          <p>Guidance on local planning and development regulations to ensure your project complies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CONTACT ═══════════════ -->
+  <section id="contact" class="page-section">
+    <div class="section-content">
+      <h1 class="page-title">Contact Us</h1>
+      <div class="contact-block">
+        <p><strong>Jacqui Ray — Director</strong></p>
+        <p><strong>Mail:</strong> PO Box 844, St Ives NSW 2075</p>
+        <p><strong>Email:</strong> <a href="mailto:info@jacquiray.com.au">info@jacquiray.com.au</a></p>
+        <p><strong>Tel:</strong> 02 4377 1422</p>
+        <p><strong>Mob:</strong> 0417 680 228</p>
+      </div>
+
+      <h2 style="font-size:1rem;color:#4a6e96;margin-bottom:4px;">Send us a message</h2>
+      <form class="contact-form">
+        <label>Name</label>
+        <input type="text" placeholder="Your name">
+        <label>Phone</label>
+        <input type="tel" placeholder="Your phone number">
+        <label>Email</label>
+        <input type="email" placeholder="Your email address">
+        <label>Tell us what you are after</label>
+        <textarea placeholder="Your message..."></textarea>
+        <button type="submit">Send</button>
+      </form>
+
+      <p class="service-area">Servicing Sydney's Northern Beaches, Upper and Lower North Shore and North West Sydney.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Consultancy &nbsp;*&nbsp; Design &nbsp;*&nbsp; Planning &nbsp;*&nbsp; Horticulture</span>
+    <br><br>© Landscape Design by Jacqui Ray &nbsp;|&nbsp; St Ives NSW 2075 &nbsp;|&nbsp; info@jacquiray.com.au
+  </footer>
+
+  <script>
+    function showPage(id, el) {
+      document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      el.classList.add('active');
+      window.scrollTo(0, 0);
+      return false;
+    }
+    document.querySelectorAll('nav a').forEach(a => {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        const id = this.getAttribute('href').replace('#','');
+        showPage(id, this);
+      });
+    });
+  </script>
+</body>
+</html>

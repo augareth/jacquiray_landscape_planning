@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jacqui Ray Landscape Planning — Northern Sydney & Central Coast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:    #7CBEC6;
+      --teal-dk: #5a9fa8;
+      --dark:    #333333;
+      --mid:     #666666;
+      --light:   #f7f9fa;
+      --border:  #e2e8ea;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--dark); background: #fff; line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ═══════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════ */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 40px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .logo-icon {
+      width: 40px; height: 40px;
+    }
+    .logo-wordmark {
+      font-size: 1rem; font-weight: 600; letter-spacing: 0.04em; line-height: 1.2;
+      color: var(--dark);
+    }
+    .logo-wordmark em { font-style: italic; font-weight: 300; color: var(--teal); }
+    .logo-sub { font-size: 0.68rem; letter-spacing: 0.12em; color: var(--mid); text-transform: uppercase; }
+
+    /* Desktop nav */
+    .main-nav { display: flex; gap: 32px; align-items: center; }
+    .main-nav a {
+      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--mid); font-weight: 600; transition: color 0.2s;
+      padding-bottom: 2px; border-bottom: 2px solid transparent;
+    }
+    .main-nav a:hover { color: var(--teal); border-bottom-color: var(--teal); }
+    .nav-cta {
+      background: var(--teal); color: #fff !important;
+      padding: 8px 18px; border-radius: 3px;
+      border-bottom: none !important; transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal-dk) !important; }
+
+    /* Hamburger (mobile) */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: 0.3s; }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    .hero {
+      margin-top: 69px; /* header height */
+      position: relative;
+      height: 520px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #b8d8c8 0%, #8db8c8 40%, #6a9fb0 100%);
+    }
+    /* Decorative SVG overlay - architectural line drawing feel */
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.32) 100%);
+    }
+    .hero-label {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      z-index: 2; text-align: center; color: #fff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+    }
+    .hero-label .eyebrow {
+      font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(255,255,255,0.85); margin-bottom: 10px;
+    }
+    .hero-label h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; line-height: 1.2;
+    }
+    .hero-label .tagline {
+      margin-top: 14px; font-size: 1rem; font-weight: 300; letter-spacing: 0.05em;
+      color: var(--teal); text-transform: uppercase;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      z-index: 2; color: rgba(255,255,255,0.7); font-size: 0.7rem; letter-spacing: 0.15em;
+      text-transform: uppercase; text-align: center;
+    }
+    .hero-scroll::after {
+      content: '↓'; display: block; font-size: 1.1rem; margin-top: 4px; animation: bounce 1.6s infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+    /* Photo placeholder strip */
+    .hero-strip {
+      display: flex; gap: 3px; height: 90px;
+      background: #fff;
+    }
+    .strip-item {
+      flex: 1; cursor: pointer; overflow: hidden; transition: flex 0.4s;
+    }
+    .strip-item:hover { flex: 1.6; }
+    .strip-item .strip-inner {
+      height: 100%; transition: transform 0.4s;
+    }
+    .strip-item:hover .strip-inner { transform: scale(1.05); }
+    .s1 { background: linear-gradient(135deg, #a8c5a0, #7db090); }
+    .s2 { background: linear-gradient(135deg, #b0cfe8, #7aa8cc); }
+    .s3 { background: linear-gradient(135deg, #d4e8c2, #a8c5a0); }
+    .s4 { background: linear-gradient(135deg, #6a9fb0, #4a7f90); }
+    .s5 { background: linear-gradient(135deg, #c8d8e0, #a0b8c8); }
+
+    /* ═══════════════════════════════════════
+       INTRO SECTION
+    ═══════════════════════════════════════ */
+    .intro {
+      max-width: 780px; margin: 0 auto;
+      padding: 70px 40px 50px;
+      text-align: center;
+    }
+    .intro .logo-large {
+      display: flex; flex-direction: column; align-items: center;
+      margin-bottom: 28px;
+    }
+    .intro .logo-large svg { width: 64px; height: 64px; }
+    .intro .logo-large .name { font-size: 1.2rem; font-weight: 600; margin-top: 8px; }
+    .intro .logo-large .name em { color: var(--teal); font-style: italic; font-weight: 300; }
+
+    .intro h2 {
+      font-size: 1.55rem; font-weight: 700; color: var(--dark);
+      margin-bottom: 16px;
+    }
+    .intro .kicker {
+      font-size: 1rem; color: var(--teal); text-transform: uppercase;
+      letter-spacing: 0.15em; font-weight: 600; margin-bottom: 24px;
+    }
+    .intro p { color: var(--mid); font-size: 0.95rem; margin-bottom: 14px; }
+
+    /* ═══════════════════════════════════════
+       SERVICES SECTION
+    ═══════════════════════════════════════ */
+    .services-section { background: var(--light); padding: 70px 40px; }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header .kicker {
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--teal); font-weight: 600; margin-bottom: 10px;
+    }
+    .section-header h2 { font-size: 1.6rem; font-weight: 700; }
+
+    .services-grid {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .service-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 4px;
+      padding: 28px 24px; transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .service-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); transform: translateY(-3px); }
+    .service-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--teal); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .service-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .service-card h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+    .service-card p { font-size: 0.83rem; color: var(--mid); line-height: 1.65; }
+
+    /* ═══════════════════════════════════════
+       ABOUT / DIRECTOR
+    ═══════════════════════════════════════ */
+    .about-section { padding: 80px 40px; max-width: 1000px; margin: 0 auto; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about-img-block { position: relative; }
+    .about-img {
+      width: 100%; height: 380px; border-radius: 4px;
+      background: linear-gradient(150deg, #c8d8e0 0%, #8db8c8 60%, #6a9fb0 100%);
+      object-fit: cover;
+    }
+    .about-badge {
+      position: absolute; bottom: -16px; right: -16px;
+      background: var(--teal); color: #fff; border-radius: 4px;
+      padding: 14px 20px; font-size: 0.78rem; line-height: 1.5;
+      font-weight: 600;
+    }
+    .about-content .kicker {
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--teal); font-weight: 600; margin-bottom: 14px;
+    }
+    .about-content h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; }
+    .about-content p { color: var(--mid); font-size: 0.9rem; margin-bottom: 14px; }
+    .about-name { font-size: 1rem; font-weight: 700; margin-top: 20px; }
+    .about-title { font-size: 0.82rem; color: var(--teal); font-weight: 600; letter-spacing: 0.05em; }
+
+    /* ═══════════════════════════════════════
+       PROJECT GALLERY
+    ═══════════════════════════════════════ */
+    .gallery-section { background: var(--light); padding: 70px 40px; }
+    .gallery-grid {
+      max-width: 1000px; margin: 40px auto 0;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 220px 220px; gap: 6px;
+    }
+    .gallery-item {
+      border-radius: 3px; overflow: hidden; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .gallery-item:hover { opacity: 0.88; }
+    .gallery-item.wide { grid-column: span 2; }
+    .g-inner { width: 100%; height: 100%; }
+    .g1 { background: linear-gradient(135deg, #a8c5a0, #7db090); }
+    .g2 { background: linear-gradient(135deg, #b0cfe8, #7aa8cc); }
+    .g3 { background: linear-gradient(135deg, #6a9fb0, #4a7f90); }
+    .g4 { background: linear-gradient(135deg, #d4e8c2, #a8c5a0); }
+    .g5 { background: linear-gradient(135deg, #c8d8e0, #8db8c8); }
+
+    /* ═══════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════ */
+    .contact-section { padding: 80px 40px; max-width: 1000px; margin: 0 auto; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .contact-info .kicker {
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--teal); font-weight: 600; margin-bottom: 14px;
+    }
+    .contact-info h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 24px; }
+    .contact-row { display: flex; gap: 14px; margin-bottom: 18px; }
+    .contact-dot {
+      width: 36px; height: 36px; border-radius: 50%; background: var(--teal);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .contact-dot svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .contact-detail strong { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); }
+    .contact-detail span { font-size: 0.9rem; color: var(--dark); }
+    .service-area-note {
+      margin-top: 24px; padding: 14px 16px;
+      background: var(--light); border-left: 3px solid var(--teal); border-radius: 2px;
+      font-size: 0.82rem; color: var(--mid); font-style: italic;
+    }
+
+    /* Form */
+    .contact-form h3 { font-size: 1rem; font-weight: 700; margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block; font-size: 0.75rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--mid); margin-bottom: 6px; font-weight: 600;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 11px 14px;
+      border: 1px solid var(--border); border-radius: 3px;
+      font-family: inherit; font-size: 0.88rem; color: var(--dark);
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--teal);
+    }
+    .form-group textarea { height: 110px; resize: vertical; }
+    .btn-submit {
+      width: 100%; background: var(--teal); color: #fff; border: none;
+      padding: 13px; border-radius: 3px; font-family: inherit;
+      font-size: 0.88rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--teal-dk); }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,0.6);
+      padding: 36px 40px; display: flex;
+      align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo { color: #fff; font-size: 0.88rem; font-weight: 600; }
+    .footer-logo em { color: var(--teal); font-style: italic; font-weight: 300; }
+    footer p { font-size: 0.75rem; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.75rem; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--teal); }
+
+    /* ═══════════════════════════════════════
+       MOBILE NAV OVERLAY
+    ═══════════════════════════════════════ */
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: rgba(255,255,255,0.98); flex-direction: column;
+      align-items: center; justify-content: center; gap: 28px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 1.2rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--dark); transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--teal); }
+    .mobile-close {
+      position: absolute; top: 20px; right: 28px;
+      font-size: 1.8rem; cursor: pointer; color: var(--dark);
+    }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .site-header { padding: 14px 20px; }
+      .main-nav { display: none; }
+      .hamburger { display: flex; }
+      .hero { height: 380px; }
+      .intro { padding: 50px 24px 36px; }
+      .services-section, .gallery-section, .contact-section { padding: 50px 20px; }
+      .about-section { padding: 50px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-badge { right: 0; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item.wide { grid-column: span 2; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ SITE HEADER ═══ -->
+  <header class="site-header">
+    <a href="#home" class="logo">
+      <!-- Simple house/leaf SVG logo mark -->
+      <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="4,20 20,6 36,20" stroke="#7CBEC6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="10" y="20" width="20" height="14" rx="1" stroke="#7CBEC6" stroke-width="2" fill="none"/>
+        <path d="M24,28 Q28,22 34,20" stroke="#a8c5a0" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <circle cx="32" cy="19" r="2" fill="#a8c5a0"/>
+      </svg>
+      <div>
+        <div class="logo-wordmark">Jacqui Ray <em>Landscape Planning</em></div>
+        <div class="logo-sub">Drafting &amp; Design</div>
+      </div>
+    </a>
+    <nav class="main-nav">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact" class="nav-cta">Get in Touch</a>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <!-- Mobile nav overlay -->
+  <div class="mobile-nav" id="mobileNav">
+    <span class="mobile-close" onclick="toggleMenu()">✕</span>
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#services" onclick="toggleMenu()">Services</a>
+    <a href="#projects" onclick="toggleMenu()">Projects</a>
+    <a href="#contact" onclick="toggleMenu()">Get in Touch</a>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section id="home" class="hero">
+    <div class="hero-label">
+      <p class="eyebrow">Northern Sydney &amp; Central Coast</p>
+      <h1>Landscape Planning<br>&amp; Drafting Design</h1>
+      <p class="tagline">From Concept Through to Council Approval</p>
+    </div>
+    <div class="hero-scroll">Explore</div>
+  </section>
+
+  <!-- Photo strip (project image placeholders) -->
+  <div class="hero-strip">
+    <div class="strip-item"><div class="strip-inner s1"></div></div>
+    <div class="strip-item"><div class="strip-inner s2"></div></div>
+    <div class="strip-item"><div class="strip-inner s3"></div></div>
+    <div class="strip-item"><div class="strip-inner s4"></div></div>
+    <div class="strip-item"><div class="strip-inner s5"></div></div>
+  </div>
+
+  <!-- ═══ INTRO ═══ -->
+  <section class="intro">
+    <div class="logo-large">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="6,32 32,10 58,32" stroke="#7CBEC6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="16" y="32" width="32" height="22" rx="1.5" stroke="#7CBEC6" stroke-width="2.5" fill="none"/>
+        <path d="M38,46 Q46,36 56,32" stroke="#a8c5a0" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <circle cx="54" cy="30" r="3" fill="#a8c5a0"/>
+      </svg>
+      <div class="name">Jacqui Ray <em>Landscape Planning</em></div>
+    </div>
+    <h2>Northern Sydney &amp; Central Coast Building Design &amp; Landscape Drafting</h2>
+    <p class="kicker">WE PLAN YOUR OUTDOOR SPACE — FROM CONCEPT THROUGH TO APPROVAL</p>
+    <p>We are a landscape planning and drafting studio providing a professional design, documentation and council approval service to bring your outdoor vision to reality. We listen to you.</p>
+    <p>Are you planning to landscape your home, add a pool, or need council approval for your development? We ensure your landscape plans are both functional and beautifully designed — and fully compliant with local council requirements.</p>
+    <p>Navigating council approvals can be complex, which is why we work closely with clients throughout the entire process. From the initial consultation to the final submission, we're there every step of the way.</p>
+  </section>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section id="services" class="services-section">
+    <div class="section-header">
+      <div class="kicker">What We Do</div>
+      <h2>Our Services</h2>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">
+          <!-- ruler/pencil icon -->
+          <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+        </div>
+        <h3>Landscape Design Plans</h3>
+        <p>Individually designed, site-specific landscape plans from small courtyards to large residential sites — native, water-wise, or sleek contemporary styles.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <!-- pool/waves icon -->
+          <svg viewBox="0 0 24 24"><path d="M2 12h20"/><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><rect x="6" y="3" width="12" height="9" rx="1"/></svg>
+        </div>
+        <h3>Swimming Pool Design &amp; Approval</h3>
+        <p>Pool design, drafting and full council approval documentation for Development Applications and Complying Development Certificates.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <!-- document/stamp icon -->
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/><line x1="9" y1="11" x2="12" y2="11"/></svg>
+        </div>
+        <h3>Council Development Applications (DAs)</h3>
+        <p>Landscape plans prepared to council specification for Development Application submissions across Northern Sydney and Central Coast LGAs.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <!-- checkmark/cert icon -->
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>Complying Development Certificates (CDC)</h3>
+        <p>Landscape documentation for CDC approvals — a faster alternative to the full DA process for eligible residential works.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <!-- leaf/plant icon -->
+          <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 22"/><path d="M9.1 17.4C9.1 17.4 8 11 13 8c4-2.4 9-2 9-2s-1 9-5 11c-2 .8-4.3.5-6.5-1.6"/></svg>
+        </div>
+        <h3>Horticultural Advice &amp; Planting Plans</h3>
+        <p>Expert plant selection and horticultural advice based on 19+ years' experience — tailored to your soil, aspect, and local conditions.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <!-- map/regulation icon -->
+          <svg viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        </div>
+        <h3>Planning &amp; Development Regulation Advice</h3>
+        <p>Guidance on local planning controls, setbacks, landscaping ratios, and development regulations for your site.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT / DIRECTOR ═══ -->
+  <section id="about" class="about-section">
+    <div class="about-grid">
+      <div class="about-img-block">
+        <div class="about-img"></div>
+        <div class="about-badge">
+          19+ Years<br>Experience<br>in Landscape<br>Design &amp; Planning
+        </div>
+      </div>
+      <div class="about-content">
+        <p class="kicker">About Us</p>
+        <h2>Jacqui Ray — Landscape Planner &amp; Drafting Designer</h2>
+        <p>Jacqui Ray Landscape Planning offers a complete and experienced approach to landscape design and drafting. With over 19 years specialising in residential gardens, pool design, and council documentation across Northern Sydney and the Central Coast, we provide a full design-to-approval service.</p>
+        <p>Our practice specialises in individually designed, site-specific landscape solutions — from compact courtyard spaces to large residential properties. We work across a range of styles: from sleek, contemporary outdoor rooms to water-efficient native gardens that thrive in the local climate.</p>
+        <p>Jacqui's background in horticulture, combined with deep knowledge of local council planning requirements, means you can be confident the plans will be both beautiful and approvable.</p>
+        <p>Jacqui has also contributed research and design to TV lifestyle programs including <em>Domestic Blitz</em> and <em>Better Homes and Gardens</em>.</p>
+        <p class="about-name">Jacqui Ray</p>
+        <p class="about-title">Director &amp; Principal Landscape Planner</p>
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--mid);">
+          M: <a href="tel:0417680228" style="color:var(--teal);">0417 680 228</a> &nbsp;|&nbsp;
+          E: <a href="mailto:info@jacquiray.com.au" style="color:var(--teal);">info@jacquiray.com.au</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROJECT GALLERY ═══ -->
+  <section id="projects" class="gallery-section">
+    <div class="section-header">
+      <div class="kicker">Our Work</div>
+      <h2>Completed Projects</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide"><div class="g-inner g1"></div></div>
+      <div class="gallery-item"><div class="g-inner g2"></div></div>
+      <div class="gallery-item"><div class="g-inner g3"></div></div>
+      <div class="gallery-item wide"><div class="g-inner g4"></div></div>
+      <div class="gallery-item"><div class="g-inner g5"></div></div>
+    </div>
+    <p style="text-align:center;margin-top:18px;font-size:0.78rem;color:var(--mid);font-style:italic;">
+      ← Replace placeholder colours above with your own project photographs →
+    </p>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact" class="contact-section">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="kicker">Get In Touch</p>
+        <h2>Let's Talk About Your Project</h2>
+
+        <div class="contact-row">
+          <div class="contact-dot">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="contact-detail">
+            <strong>Phone / Mobile</strong>
+            <span>02 4377 1422 &nbsp;|&nbsp; 0417 680 228</span>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-dot">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="contact-detail">
+            <strong>Email</strong>
+            <span><a href="mailto:info@jacquiray.com.au" style="color:var(--teal);">info@jacquiray.com.au</a></span>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-dot">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="contact-detail">
+            <strong>Postal Address</strong>
+            <span>PO Box 844, St Ives NSW 2075</span>
+          </div>
+        </div>
+
+        <div class="service-area-note">
+          Servicing Northern Sydney and Central Coast Local Government Areas — including Upper and Lower North Shore, Northern Beaches, and North West Sydney.
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="0400 000 000">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label>Service Enquiry</label>
+          <select>
+            <option value="">— Select a service —</option>
+            <option>Landscape Design Plans</option>
+            <option>Swimming Pool Design &amp; Approval</option>
+            <option>Council Development Application (DA)</option>
+            <option>Complying Development Certificate (CDC)</option>
+            <option>Horticultural Advice &amp; Planting Plans</option>
+            <option>Planning &amp; Development Advice</option>
+            <option>Other / Not Sure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell Us About Your Project</label>
+          <textarea placeholder="Briefly describe your site, what you're hoping to achieve, and your council area..."></textarea>
+        </div>
+        <button class="btn-submit" type="submit">Send Enquiry</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div>
+      <div class="footer-logo">Jacqui Ray <em>Landscape Planning</em></div>
+      <p>© 2026 Jacqui Ray Landscape Planning. All rights reserved.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p style="font-size:0.72rem;">St Ives NSW 2075 &nbsp;|&nbsp; info@jacquiray.com.au &nbsp;|&nbsp; 0417 680 228</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileNav').classList.toggle('open');
+    }
+    // Smooth active state on scroll (optional enhancement)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
