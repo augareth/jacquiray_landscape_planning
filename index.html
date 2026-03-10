@@ -228,12 +228,13 @@
     }
     .gallery-item:hover { opacity: 0.88; }
     .gallery-item.wide { grid-column: span 2; }
-    .g-inner { width: 100%; height: 100%; }
-    .g1 { background: linear-gradient(135deg, #a8c5a0, #7db090); }
-    .g2 { background: linear-gradient(135deg, #b0cfe8, #7aa8cc); }
-    .g3 { background: linear-gradient(135deg, #6a9fb0, #4a7f90); }
-    .g4 { background: linear-gradient(135deg, #d4e8c2, #a8c5a0); }
-    .g5 { background: linear-gradient(135deg, #c8d8e0, #8db8c8); }
+    /* Images fill their grid cell without stretching or distorting */
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
 
     /* ═══════════════════════════════════════
        CONTACT
@@ -507,15 +508,12 @@
       <h2>Completed Projects</h2>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item wide"><img src="Assets/plan1a.jpg" alt="Landscape project 4"><div class="g-inner g1"></div></div>
-      <div class="gallery-item"><img src="Assets/plan2.jpg" alt="Landscape project 2"></div>
-      <div class="gallery-item"><img src="Assets/plan1.jpg" alt="Landscape project 1"></div>
-      <div class="gallery-item wide"><img src="Assets/plan4.jpg" alt="Landscape project 4"><div class="g-inner g4"></div></div>
-      <div class="gallery-item"><div class="g-inner g5"></div></div>
+      <div class="gallery-item wide"><img src="Assets/plan1a.jpg" alt="Landscape design plan"></div>
+      <div class="gallery-item"><img src="Assets/plan2.jpg" alt="Landscape design plan"></div>
+      <div class="gallery-item"><img src="Assets/plan1.jpg" alt="Landscape design plan"></div>
+      <div class="gallery-item wide"><img src="Assets/plan4.jpg" alt="Landscape design plan"></div>
+      <div class="gallery-item"><img src="Assets/old%20site/IMG_0581.JPG" alt="Completed garden project"></div>
     </div>
-    <p style="text-align:center;margin-top:18px;font-size:0.78rem;color:var(--mid);font-style:italic;">
-      ← Replace placeholder colours above with your own project photographs →
-    </p>
   </section>
 
   <!-- ═══ CONTACT ═══ -->
