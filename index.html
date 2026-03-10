@@ -228,12 +228,13 @@
     }
     .gallery-item:hover { opacity: 0.88; }
     .gallery-item.wide { grid-column: span 2; }
-    /* Images fill their grid cell without stretching or distorting */
+    /* Images display at their natural size, centred in the grid cell */
     .gallery-item img {
       width: 100%; height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
       display: block;
+      background: #fff;
     }
 
     /* ═══════════════════════════════════════
@@ -479,7 +480,7 @@
   <section id="about" class="about-section">
     <div class="about-grid">
       <div class="about-img-block">
-        <div class="about-img"></div>
+        <img class="about-img" src="Assets/fakejacqui.jpg" alt="Jacqui Ray — Landscape Planner">
         <div class="about-badge">
           25+ Years<br>Experience<br>in Landscape<br>Design &amp; Planning
         </div>
